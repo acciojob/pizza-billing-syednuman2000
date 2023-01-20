@@ -5,9 +5,10 @@ public class Pizza {
     private int price;
     private boolean isVeg;
     private String bill;
-    private boolean Cheese;
-    private boolean Toppings;
-    private boolean Bag;
+    private boolean Cheese=false;
+    private boolean Toppings=false;
+    private boolean Bag=false;
+    private boolean billGenerated=false;
 
     public Pizza(boolean isVeg){
         this.isVeg = isVeg;
@@ -46,22 +47,25 @@ public class Pizza {
         }
     }
 
-    public String getBill(){
+    public String getBill() {
         // your code goes here
-        if(isVeg) bill+="Base Price Of The Pizza: 300\n";
-        else bill+="Base Price Of The Pizza: 400\n";
+        if (!billGenerated) {
+            if (isVeg) bill += "Base Price Of The Pizza: 300\n";
+            else bill += "Base Price Of The Pizza: 400\n";
 
-        if(Cheese) bill+="Extra Cheese Added: 80\n";
+            if (Cheese) bill += "Extra Cheese Added: 80\n";
 
-        if(Toppings){
-            if(isVeg) bill+="Extra Toppings Added: 70\n";
-            else bill+="Extra Toppings Added: 120\n";
+            if (Toppings) {
+                if (isVeg) bill += "Extra Toppings Added: 70\n";
+                else bill += "Extra Toppings Added: 120\n";
+            }
+
+            if (Bag) bill += "Paperbag Added: 20\n";
+
+            bill += "Total Price: " + price;
+            bill += "\n";
+            billGenerated = true;
         }
-
-        if(Bag) bill+="Paperbag Added: 20\n";
-
-        bill+="Total Price: ";
-        bill+=String.valueOf(price);
 
         return this.bill;
     }
